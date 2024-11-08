@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@*mod with blazor *@
+@*This renders the entire "component.razor" *@
+@(await Html.RenderComponentAsync<MVC_TO_BLAZOR.Views.Shared.Component.Component>
+    (
+    RenderMode.ServerPrerendered,
+    new {  Data= "" }
+    )
+)
+@*mod with blazor *@
+
+@(await Html.RenderComponentAsync<MVC_TO_BLAZOR.Views.Shared.Component.Toast>
+    (RenderMode.ServerPrerendered, null)
+)
+
+
+
+
