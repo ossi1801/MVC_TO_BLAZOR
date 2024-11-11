@@ -6,10 +6,15 @@
 @code {
     [Parameter]  
     public string Data { get; set; } = string.Empty;
-    private void Test()
+    
+    private async void Test()
     {
-        Data = "Button Clicked";
-        Console.WriteLine("Button was clicked from client side and registered at server");
+       
+        // Data = "Button Clicked";
+        // Console.WriteLine("Button was clicked from client side and registered at server");
+        // ChatHub test = new ChatHub();
+        // Console.WriteLine(test);
+        // await test.SendMessage("Ossi", "testing");
     }
 }
 @*this entire file is mod with blazor *@

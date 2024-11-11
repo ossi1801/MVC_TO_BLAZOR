@@ -1,16 +1,18 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using MVC_TO_BLAZOR.Models;
-
+using MVC_TO_BLAZOR.Views;
 namespace MVC_TO_BLAZOR.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    private readonly IHubContext<ChatHub> _hubContext;
+    public HomeController(ILogger<HomeController> logger, IHubContext<ChatHub> hubContext)
     {
         _logger = logger;
+        _hubContext = hubContext;
     }
 
     public IActionResult Index()
@@ -18,8 +20,13 @@ public class HomeController : Controller
         return View();
     }
 
+    public async Task BroadcastMessage(string message)
+    {
+        await _hubContext.Clients.All.SendAsync("ReceiveMessage","SERVER SAYS:" , message);
+    }
     public IActionResult Privacy()
     {
+      
         return View();
     }
 

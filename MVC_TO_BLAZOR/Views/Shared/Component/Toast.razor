@@ -2,12 +2,12 @@
 
 @code {
     private string _test = "test";
+
     protected override void OnInitialized()
     {
-        // get employee with {EmployeeId} from DB
         _test = "OnInitilized test";
         Console.WriteLine(_test);
-        //employee = new Employee { FirstName = "Vikram", LastName = "Reddy" };
         base.OnInitialized();
     }
+
 }
