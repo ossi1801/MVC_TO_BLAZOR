@@ -1,3 +1,4 @@
+using MVC_TO_BLAZOR.Controllers;
 using MVC_TO_BLAZOR.Views;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,7 @@ builder.Services.AddServerSideBlazor();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
+builder.Services.AddSingleton<JavascriptController>();
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
@@ -40,6 +42,9 @@ app.MapHub<ChatHub>("/chatHub");
 //mod with blazor
 app.UseEndpoints(endpoints =>
 {
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");

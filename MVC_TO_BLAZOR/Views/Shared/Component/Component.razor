@@ -1,20 +1,21 @@
 @using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.SignalR
+@using MVC_TO_BLAZOR.Controllers
 <h3>Blazor Component in MVC</h3>
 <button @onclick="Test" class="btn btn-dark">Click to get answer</button>
 <br />
 <div >@Data </div>
+@inject IHubContext<ChatHub> HubContext;
+@inject JavascriptController Controller;
 @code {
     [Parameter]  
     public string Data { get; set; } = string.Empty;
     
     private async void Test()
     {
-       
-        // Data = "Button Clicked";
-        // Console.WriteLine("Button was clicked from client side and registered at server");
-        // ChatHub test = new ChatHub();
-        // Console.WriteLine(test);
-        // await test.SendMessage("Ossi", "testing");
+        await HubContext.Clients.All.SendAsync("ReceiveMessage", "Dataa", "servulta");
+        await Controller.BroadcastMessage("Broadcast from server at button press");
+         Console.WriteLine("Button was clicked from client side and registered at server");
     }
 }
 @*this entire file is mod with blazor *@

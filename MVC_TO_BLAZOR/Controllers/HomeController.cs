@@ -14,25 +14,24 @@ public class HomeController : Controller
         _logger = logger;
         _hubContext = hubContext;
     }
-
-    public IActionResult Index()
-    {
-        return View();
-    }
-
+    //Ei toimi ? --> Controller ei oo service ?
     public async Task BroadcastMessage(string message)
     {
         await _hubContext.Clients.All.SendAsync("ReceiveMessage","SERVER SAYS:" , message);
     }
-    public IActionResult Privacy()
+    public IActionResult Index()
     {
-      
         return View();
     }
-
+    public IActionResult Privacy()
+    {
+        return View();
+    }
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+
+
 }
