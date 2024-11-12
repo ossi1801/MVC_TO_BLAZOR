@@ -20,17 +20,5 @@
     (RenderMode.ServerPrerendered, null)
 )
 
-@(await Html.RenderComponentAsync<MVC_TO_BLAZOR.Views.Shared.Component.Canvas2d>(RenderMode.ServerPrerendered, null))
-<canvas id="test" width="300" height="300"></canvas>
-<script>
-    function draw() {
-        const canvas = document.getElementById("test");
-        if (canvas.getContext) {
-            const ctx = canvas.getContext("2d");
-        }
-       // DotNet.invokeMethodAsync('MVC_TO_BLAZOR', 'Hello');//, {ARGUMENTS});
-        // ImAFunction();
-    }
-    
-    window.addEventListener("load", draw);
-</script>
+@(await Html.RenderComponentAsync<MVC_TO_BLAZOR.Views.Shared.Component.Canvas2d>(RenderMode.Server, null))
+
