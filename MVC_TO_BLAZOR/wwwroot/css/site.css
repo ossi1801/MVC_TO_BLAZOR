@@ -16,3 +16,6 @@ html {
 body {
   margin-bottom: 60px;
 }
+canvas{
+  border: 1px solid black;
+}

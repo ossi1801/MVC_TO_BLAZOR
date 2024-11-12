@@ -38,4 +38,11 @@ connection.on("ReceiveMessage", (user, message) => {
     // document.getElementById("messageList").appendChild(li);
 });
 
+connection.on("CanvasInit", (id,data) => {
+    window.parent.draw(id);
+    console.log(`${id}: ${data}`)
+    // const li = document.createElement("li");
+    // li.textContent = `${user}: ${message}`;
+    // document.getElementById("messageList").appendChild(li);
+});
 // Start the connection.

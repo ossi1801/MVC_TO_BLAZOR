@@ -1,0 +1,30 @@
+@using Microsoft.AspNetCore.SignalR
+@using MVC_TO_BLAZOR.Controllers
+<h3>Canvas2d</h3>
+<canvas id="canvas" width="500" height="500"></canvas>
+<button @onclick="Test">Paint</button>
+@inject JavascriptController Controller;
+@code {
+    private string _test = "Canvas";
+    protected override void OnInitialized()
+    {
+        _test = "Canvas";
+        Console.WriteLine(_test);
+       // Controller.CanvasInit("canvas","yes");
+        base.OnInitialized();
+    }
+    // [Parameter]  
+    // public string Data { get; set; } = string.Empty;
+    private async void Test()
+    {
+       await Controller.CanvasInit("canvas","yes");
+    }
+    // private async void Test()
+    // {
+    //     //await HubContext.Clients.All.SendAsync("ReceiveMessage", "Data ja :", Data);
+    //     await Controller.BroadcastMessage("Broadcast from server at button press");
+    //     Console.WriteLine("Button was clicked from client side and registered at server");
+    // }
+
+
+}
