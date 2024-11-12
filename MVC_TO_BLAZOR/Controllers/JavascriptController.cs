@@ -16,4 +16,8 @@ public class JavascriptController
     {
         await _hubContext.Clients.All.SendAsync("ReceiveMessage","SERVER SAYS:" , message);
     }
+    public async Task CanvasInit(string id,string data)
+    {
+        await _hubContext.Clients.All.SendAsync("CanvasInit",id,data);
+    }
 }
