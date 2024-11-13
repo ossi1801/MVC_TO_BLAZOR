@@ -21,3 +21,26 @@ public class ChatHub : Hub
     //     await Clients.All.SendAsync("ReceiveMessage", user, message);
     // }
 }
+
+public class WriterHub : Hub<IWriterHub>
+{
+    public override Task OnConnectedAsync()
+    {
+        Console.WriteLine($"Writer_id: {Context.ConnectionId} connected");
+        return base.OnConnectedAsync();
+    }
+    public override Task OnDisconnectedAsync(Exception? exception)
+    {
+        Console.WriteLine($"Writer_id: {Context.ConnectionId} disconnected");
+        //Console.WriteLine(exception.Message);
+        return base.OnDisconnectedAsync(exception);
+    }
+     public async Task SendMessageToWriter(string id, string message)
+     {
+         await Clients.All.SendMessageToWriter( id, message);
+     }
+}
+public interface IWriterHub
+{
+    Task SendMessageToWriter(string id, string message);
+}

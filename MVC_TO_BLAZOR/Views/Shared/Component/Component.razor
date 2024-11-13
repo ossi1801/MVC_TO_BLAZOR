@@ -2,20 +2,32 @@
 @using Microsoft.AspNetCore.SignalR
 @using MVC_TO_BLAZOR.Controllers
 <h3>Blazor Component in MVC</h3>
-<button @onclick="Test" class="btn btn-dark">Click to get answer</button>
+<label>
+    InputValue:
+    <input @bind="Data" />
+</label>
+<button @onclick="Test" class="btn btn-dark">Broadcast</button>
 <br />
+<button @onclick="Writer" class="btn btn-dark">Writer</button>
 <div >@Data </div>
 @inject IHubContext<ChatHub> HubContext;
 @inject JavascriptController Controller;
+@inject IHubContext<WriterHub> WriterHub;
 @code {
     [Parameter]  
     public string Data { get; set; } = string.Empty;
     
     private async void Test()
     {
-        await HubContext.Clients.All.SendAsync("ReceiveMessage", "Dataa", "servulta");
+        await HubContext.Clients.All.SendAsync("ReceiveMessage", "Data ja :", Data);
         await Controller.BroadcastMessage("Broadcast from server at button press");
          Console.WriteLine("Button was clicked from client side and registered at server");
     }
+    private async void Writer()
+    {
+        await WriterHub.Clients.All.SendAsync("SendMessageToWriter", "SomeID|", Data);
+        //Console.WriteLine("Button was clicked from client side and registered at server");
+    }
 }
+
 @*this entire file is mod with blazor *@

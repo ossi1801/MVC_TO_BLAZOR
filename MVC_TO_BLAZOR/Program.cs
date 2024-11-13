@@ -39,6 +39,7 @@ app.UseAuthorization();
 // UseCors must be called before MapHub.
 app.UseCors();
 app.MapHub<ChatHub>("/chatHub");
+app.MapHub<WriterHub>("/wr");
 //mod with blazor
 app.UseEndpoints(endpoints =>
 {
